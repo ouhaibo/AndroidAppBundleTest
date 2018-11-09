@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:dist="http://schemas.android.com/apk/distribution"
+          package="com.ohb.dynamic_feature_1">
+
+    <dist:module
+        dist:onDemand="true"
+        dist:title="@string/title_dynamic_feature_1">
+        <dist:fusing dist:include="true"/>
+    </dist:module>
+
+    <application
+        android:hasCode="true">
+        <activity
+            android:name=".Feature1Activity"
+            android:label="@string/title_activity_feature1"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+    </application>
+
+</manifest>

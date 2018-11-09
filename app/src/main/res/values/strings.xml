@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">AndroidAppBundleTest</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_dynamic_feature_1">FirstDFM</string>
+    <string name="title_activity_feature1">Feature1Activity</string>
+    <string name="base_module_name">Base APK</string>
+    <string name="title_some_funny_feature">make_a_joke</string>
+</resources>
