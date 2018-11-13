@@ -14,8 +14,18 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        release {
+            storeFile file("G:\\AndroidStudio\\mykey.jks")
+            storePassword "000000"
+            keyAlias "key000000"
+            keyPassword "000000"
+        }
+    }
+
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
