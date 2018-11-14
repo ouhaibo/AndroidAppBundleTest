@@ -5,4 +5,5 @@
     <string name="title_dynamic_feature_1">FirstDFM</string>
     <string name="title_activity_feature1">Feature1Activity</string>
     <string name="base_module_name">基础包</string>
+    <string name="title_some_funny_feature">make_a_joke</string>
 </resources>
