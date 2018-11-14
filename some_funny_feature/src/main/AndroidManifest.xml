@@ -13,8 +13,7 @@
         <activity
             android:name=".MakeJokeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_make_joke"
-            android:theme="@style/FullscreenTheme">
+            android:label="Activity_Make_Joke">
         </activity>
     </application>
 
