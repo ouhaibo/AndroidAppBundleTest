@@ -15,6 +15,9 @@
             android:name=".Feature1Activity"
             android:label="@string/title_activity_feature1"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="action_launch_feature_one"/>
+            </intent-filter>
         </activity>
     </application>
 

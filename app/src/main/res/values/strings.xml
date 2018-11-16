@@ -5,4 +5,8 @@
     <string name="title_activity_feature1">Feature1Activity</string>
     <string name="base_module_name">Base APK</string>
     <string name="title_some_funny_feature">make_a_joke</string>
+
+    <string name="title_activity_make_joke">MakeJokeActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
