@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
             val request = SplitInstallRequest.newBuilder().addModule("dynamic_feature_1").build()
             splitInstallManager!!.startInstall(request).addOnSuccessListener {
                 mSessionId1 = it
+                Toast.makeText(this@MainActivity, "mSessionId1:$mSessionId1", Toast.LENGTH_SHORT).show()
             }.addOnFailureListener {
                 when ((it as SplitInstallException).errorCode) {
                     SplitInstallErrorCode.NETWORK_ERROR -> {
@@ -57,6 +58,7 @@ class MainActivity : AppCompatActivity() {
             val request = SplitInstallRequest.newBuilder().addModule("some_funny_feature").build()
             splitInstallManager!!.startInstall(request).addOnSuccessListener {
                 mSessionId2 = it
+                Toast.makeText(this@MainActivity, "mSessionId2:$mSessionId2", Toast.LENGTH_SHORT).show()
             }.addOnFailureListener {
                 when ((it as SplitInstallException).errorCode) {
                     SplitInstallErrorCode.NETWORK_ERROR -> {
@@ -82,7 +84,11 @@ class MainActivity : AppCompatActivity() {
                 DOWNLOADED -> {
                 }
                 INSTALLED -> {
-                    Toast.makeText(this@MainActivity, "dynamic feature installed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@MainActivity,
+                        "dynamic feature installed,session:${it.sessionId()}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     val newContext = createPackageContext(packageName, 0)
                     val assetManager = newContext.assets
                     val intent = Intent()
@@ -101,6 +107,7 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
                 INSTALLING -> {
+                    Toast.makeText(this@MainActivity, "installing module", Toast.LENGTH_SHORT).show()
                 }
                 REQUIRES_USER_CONFIRMATION -> {
                     startIntentSender(it.resolutionIntent().intentSender, null, 0, 0, 0)

@@ -4,6 +4,7 @@
           package="com.ohb.androidappbundletest">
 
     <application
+        android:name="com.ohb.androidappbundletest.MyApplication"
         android:hasCode="true"
         tools:replace="android:hasCode"
         android:allowBackup="true"
