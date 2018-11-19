@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import com.google.android.play.core.splitinstall.SplitInstallException
 import com.google.android.play.core.splitinstall.SplitInstallManager
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
@@ -81,6 +82,7 @@ class MainActivity : AppCompatActivity() {
                 DOWNLOADED -> {
                 }
                 INSTALLED -> {
+                    Toast.makeText(this@MainActivity, "dynamic feature installed", Toast.LENGTH_SHORT).show()
                     val newContext = createPackageContext(packageName, 0)
                     val assetManager = newContext.assets
                     val intent = Intent()
