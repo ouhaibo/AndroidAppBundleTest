@@ -21,13 +21,13 @@ class MainActivity : AppCompatActivity() {
     private var splitInstallManager: SplitInstallManager? = null
     private val action_to_feature1 = "action_launch_feature_one"
     private val action_to_feature_joke = "action_launch_feature_joke"
-    private var mSessionId1 = 0
-    private var mSessionId2 = 0
+    private var mSessionId1 = -1
+    private var mSessionId2 = -2
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        splitInstallManager = SplitInstallManagerFactory.create(applicationContext)!!
+        splitInstallManager = SplitInstallManagerFactory.create(application)!!
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
@@ -77,6 +77,7 @@ class MainActivity : AppCompatActivity() {
                 PENDING -> {
                 }
                 DOWNLOADING -> {
+
                     when (it.sessionId()) {
 
                     }

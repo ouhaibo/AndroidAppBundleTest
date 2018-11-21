@@ -1,16 +1,17 @@
 package com.ohb.some_funny_feature
 
-import android.support.v7.app.AppCompatActivity
+import android.app.Activity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_make_joke.*
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-class MakeJokeActivity : AppCompatActivity() {
+class MakeJokeActivity : Activity() {
     private val mHideHandler = Handler()
     private val mHidePart2Runnable = Runnable {
         // Delayed removal of status and navigation bar
@@ -28,7 +29,7 @@ class MakeJokeActivity : AppCompatActivity() {
     }
     private val mShowPart2Runnable = Runnable {
         // Delayed display of UI elements
-        supportActionBar?.show()
+        actionBar?.show()
         fullscreen_content_controls.visibility = View.VISIBLE
     }
     private var mVisible: Boolean = false
@@ -46,10 +47,10 @@ class MakeJokeActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Toast.makeText(this, R.string.make_joke, Toast.LENGTH_SHORT).show()
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_make_joke)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        actionBar?.setDisplayHomeAsUpEnabled(true)
 
         mVisible = true
 
@@ -81,7 +82,7 @@ class MakeJokeActivity : AppCompatActivity() {
 
     private fun hide() {
         // Hide UI first
-        supportActionBar?.hide()
+        actionBar?.hide()
         fullscreen_content_controls.visibility = View.GONE
         mVisible = false
 

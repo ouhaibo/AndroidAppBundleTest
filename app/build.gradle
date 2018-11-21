@@ -10,8 +10,8 @@ android {
         applicationId "com.ohb.androidappbundletest"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 6
-        versionName "6.0"
+        versionCode 14
+        versionName "14"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
@@ -44,7 +44,7 @@ android {
         }
 
         density {
-            enableSplit = true
+            enableSplit = false
         }
 
         abi {
@@ -65,5 +65,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.google.android.play:core:1.3.5'
+    implementation 'com.google.android.play:core:1.3.6'
 }

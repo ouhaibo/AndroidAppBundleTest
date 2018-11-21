@@ -9,8 +9,7 @@
         <dist:fusing dist:include="true"/>
     </dist:module>
 
-    <application
-        android:hasCode="true">
+    <application>
         <activity
             android:name=".Feature1Activity"
             android:label="@string/title_activity_feature1"
