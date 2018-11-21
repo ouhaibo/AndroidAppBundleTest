@@ -7,10 +7,11 @@ import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
 import android.view.Menu
 import android.view.MenuItem
+import com.ohb.androidappbundletest.BaseActivity
 import kotlinx.android.synthetic.main.activity_feature1.*
 import kotlinx.android.synthetic.main.app_bar_feature1.*
 
-class Feature1Activity : Activity(), NavigationView.OnNavigationItemSelectedListener {
+class Feature1Activity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

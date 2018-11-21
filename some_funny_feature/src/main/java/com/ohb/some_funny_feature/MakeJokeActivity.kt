@@ -1,17 +1,20 @@
 package com.ohb.some_funny_feature
 
 import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.widget.Toast
+import com.ohb.androidappbundletest.BaseActivity
 import kotlinx.android.synthetic.main.activity_make_joke.*
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-class MakeJokeActivity : Activity() {
+class MakeJokeActivity : BaseActivity() {
     private val mHideHandler = Handler()
     private val mHidePart2Runnable = Runnable {
         // Delayed removal of status and navigation bar
@@ -46,6 +49,10 @@ class MakeJokeActivity : Activity() {
         false
     }
 
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(newBase)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         Toast.makeText(this, R.string.make_joke, Toast.LENGTH_SHORT).show()
         super.onCreate(savedInstanceState)
@@ -61,6 +68,12 @@ class MakeJokeActivity : Activity() {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         dummy_button.setOnTouchListener(mDelayHideTouchListener)
+        fullscreen_content.setOnClickListener {
+            Intent(
+                this@MakeJokeActivity,
+                Class.forName("com.ohb.some_funny_feature.Joke2Activity")
+            ).also { startActivity(it) }
+        }
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {

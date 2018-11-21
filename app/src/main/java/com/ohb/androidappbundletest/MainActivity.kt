@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity() {
     private var splitInstallManager: SplitInstallManager? = null
     private val action_to_feature1 = "action_launch_feature_one"
     private val action_to_feature_joke = "action_launch_feature_joke"
-    private var mSessionId1 = -1
-    private var mSessionId2 = -2
+    private val feature_name_1 = "dynamic_feature_1"
+    private val feature_name_2 = "some_funny_feature"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,42 +35,28 @@ class MainActivity : AppCompatActivity() {
 
         txt_jump_df1.setOnClickListener {
             //TODO:跳转到dynamic feature 1的界面
-            val request = SplitInstallRequest.newBuilder().addModule("dynamic_feature_1").build()
-            splitInstallManager!!.startInstall(request).addOnSuccessListener {
-                mSessionId1 = it
-                Toast.makeText(this@MainActivity, "mSessionId1:$mSessionId1", Toast.LENGTH_SHORT).show()
-            }.addOnFailureListener {
-                when ((it as SplitInstallException).errorCode) {
-                    SplitInstallErrorCode.NETWORK_ERROR -> {
-
+            if (splitInstallManager!!.installedModules.contains(feature_name_1)) {
+                Intent().setClassName(packageName, "com.ohb.dynamic_feature_1.Feature1Activity")
+                    .also {
+                        startActivity(it)
                     }
-                    SplitInstallErrorCode.ACTIVE_SESSIONS_LIMIT_EXCEEDED -> {
-
-                    }
-                }
-            }.addOnCompleteListener {
-
+                return@setOnClickListener
             }
+            val request = SplitInstallRequest.newBuilder().addModule(feature_name_1).build()
+            splitInstallManager!!.startInstall(request)
         }
 
         txt_jump_df2.setOnClickListener {
             //TODO:跳转到dynamic feature 2的界面
-            val request = SplitInstallRequest.newBuilder().addModule("some_funny_feature").build()
-            splitInstallManager!!.startInstall(request).addOnSuccessListener {
-                mSessionId2 = it
-                Toast.makeText(this@MainActivity, "mSessionId2:$mSessionId2", Toast.LENGTH_SHORT).show()
-            }.addOnFailureListener {
-                when ((it as SplitInstallException).errorCode) {
-                    SplitInstallErrorCode.NETWORK_ERROR -> {
-
+            if (splitInstallManager!!.installedModules.contains(feature_name_2)) {
+                Intent().setClassName(packageName, "com.ohb.some_funny_feature.MakeJokeActivity")
+                    .also {
+                        startActivity(it)
                     }
-                    SplitInstallErrorCode.ACTIVE_SESSIONS_LIMIT_EXCEEDED -> {
-
-                    }
-                }
-            }.addOnCompleteListener {
-
+                return@setOnClickListener
             }
+            val request = SplitInstallRequest.newBuilder().addModule(feature_name_2).build()
+            splitInstallManager!!.startInstall(request)
         }
         splitInstallManager!!.registerListener {
             when (it.status()) {
@@ -87,25 +73,26 @@ class MainActivity : AppCompatActivity() {
                 INSTALLED -> {
                     Toast.makeText(
                         this@MainActivity,
-                        "dynamic feature installed,session:${it.sessionId()}",
+                        "dynamic feature installed",
                         Toast.LENGTH_SHORT
                     ).show()
-                    val newContext = createPackageContext(packageName, 0)
-                    val assetManager = newContext.assets
-                    val intent = Intent()
-                    var componentName: ComponentName? = null
-                    when (it.sessionId()) {
-                        mSessionId1 -> {
-                            intent.action = action_to_feature1
-                            componentName = ComponentName(newContext, "com.ohb.dynamic_feature_1.Feature1Activity")
-                        }
-                        mSessionId2 -> {
-                            intent.action = action_to_feature_joke
-                            componentName = ComponentName(newContext, "com.ohb.some_funny_feature.MakeJokeActivity")
-                        }
+//                    val newContext = createPackageContext(packageName, 0)
+//                    val assetManager = newContext.assets
+//                    val intent = Intent()
+//                    var componentName: ComponentName? = null
+                    if (it.moduleNames().contains(feature_name_1)) {
+//                        intent.action = action_to_feature1
+//                        componentName = ComponentName(newContext, "com.ohb.dynamic_feature_1.Feature1Activity")
+                        Intent().setClassName(packageName, "com.ohb.dynamic_feature_1.Feature1Activity")
+                            .also { startActivity(it) }
+                    } else if (it.moduleNames().contains(feature_name_2)) {
+//                        intent.action = action_to_feature_joke
+//                        componentName = ComponentName(newContext, "com.ohb.some_funny_feature.MakeJokeActivity")
+                        Intent().setClassName(packageName, "com.ohb.some_funny_feature.MakeJokeActivity")
+                            .also { startActivity(it) }
                     }
-                    intent.component = componentName
-                    startActivity(intent)
+//                    intent.component = componentName
+//                    startActivity(intent)
                 }
                 INSTALLING -> {
                     Toast.makeText(this@MainActivity, "installing module", Toast.LENGTH_SHORT).show()

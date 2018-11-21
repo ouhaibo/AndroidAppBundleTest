@@ -18,6 +18,8 @@
                 <action android:name="action_launch_feature_joke"/>
             </intent-filter>
         </activity>
+        <activity android:name=".Joke2Activity">
+        </activity>
     </application>
 
 </manifest>
